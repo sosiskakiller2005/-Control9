@@ -1,0 +1,23 @@
+﻿<Page x:Class="КозловControl9.Views.Pages.AddGroupPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:КозловControl9.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="533"
+      Title="AddGroupPage">
+
+    <StackPanel Width="250">
+        <Border Height="50"/>
+        <TextBlock Text="Введите группу:" FontSize="20"/>
+        <Border Height="50"/>
+        <TextBox Name="GroupNameTb" FontSize="20"/>
+        <Border Height="50"/>
+        <TextBlock Text="Введите специальность:" FontSize="20"/>
+        <Border Height="50"/>
+        <ComboBox Name="SpecializationCmb" FontSize="20"/>
+        <Border Height="50"/>
+        <Button Name="AddBtn" Content="Добавить" Click="AddBtn_Click" FontSize="20"/>
+    </StackPanel>
+</Page>

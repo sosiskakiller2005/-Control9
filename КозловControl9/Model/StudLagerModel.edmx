@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Kozlov_StudlagerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateGame" Type="date" Nullable="false" />
+          <Property Name="IdGroup" Type="int" Nullable="false" />
+          <Property Name="IdTypeCompetition" Type="int" Nullable="false" />
+          <Property Name="Evaluation" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Direction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdSpecialization" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Specialization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeCompetition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdDirection" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Accounting_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounting">
+              <PropertyRef Name="IdGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounting_TypeCompetition">
+          <End Role="TypeCompetition" Type="Self.TypeCompetition" Multiplicity="1" />
+          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeCompetition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounting">
+              <PropertyRef Name="IdTypeCompetition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Specialization">
+          <End Role="Specialization" Type="Self.Specialization" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="IdSpecialization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeCompetition_Direction">
+          <End Role="Direction" Type="Self.Direction" Multiplicity="1" />
+          <End Role="TypeCompetition" Type="Self.TypeCompetition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TypeCompetition">
+              <PropertyRef Name="IdDirection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Kozlov_StudlagerModelContainer">
+          <EntitySet Name="Accounting" EntityType="Self.Accounting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direction" EntityType="Self.Direction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialization" EntityType="Self.Specialization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeCompetition" EntityType="Self.TypeCompetition" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accounting_Group" Association="Self.FK_Accounting_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Accounting" EntitySet="Accounting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounting_TypeCompetition" Association="Self.FK_Accounting_TypeCompetition">
+            <End Role="TypeCompetition" EntitySet="TypeCompetition" />
+            <End Role="Accounting" EntitySet="Accounting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Specialization" Association="Self.FK_Group_Specialization">
+            <End Role="Specialization" EntitySet="Specialization" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeCompetition_Direction" Association="Self.FK_TypeCompetition_Direction">
+            <End Role="Direction" EntitySet="Direction" />
+            <End Role="TypeCompetition" EntitySet="TypeCompetition" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Kozlov_StudlagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accounting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateGame" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdGroup" Type="Int32" Nullable="false" />
+          <Property Name="IdTypeCompetition" Type="Int32" Nullable="false" />
+          <Property Name="Evaluation" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_Accounting_Group" FromRole="Accounting" ToRole="Group" />
+          <NavigationProperty Name="TypeCompetition" Relationship="Self.FK_Accounting_TypeCompetition" FromRole="Accounting" ToRole="TypeCompetition" />
+        </EntityType>
+        <EntityType Name="Direction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TypeCompetition" Relationship="Self.FK_TypeCompetition_Direction" FromRole="Direction" ToRole="TypeCompetition" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdSpecialization" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounting" Relationship="Self.FK_Accounting_Group" FromRole="Group" ToRole="Accounting" />
+          <NavigationProperty Name="Specialization" Relationship="Self.FK_Group_Specialization" FromRole="Group" ToRole="Specialization" />
+        </EntityType>
+        <EntityType Name="Specialization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_Group_Specialization" FromRole="Specialization" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="TypeCompetition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdDirection" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounting" Relationship="Self.FK_Accounting_TypeCompetition" FromRole="TypeCompetition" ToRole="Accounting" />
+          <NavigationProperty Name="Direction" Relationship="Self.FK_TypeCompetition_Direction" FromRole="TypeCompetition" ToRole="Direction" />
+        </EntityType>
+        <Association Name="FK_Accounting_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounting">
+              <PropertyRef Name="IdGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounting_TypeCompetition">
+          <End Role="TypeCompetition" Type="Self.TypeCompetition" Multiplicity="1" />
+          <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeCompetition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounting">
+              <PropertyRef Name="IdTypeCompetition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeCompetition_Direction">
+          <End Role="Direction" Type="Self.Direction" Multiplicity="1" />
+          <End Role="TypeCompetition" Type="Self.TypeCompetition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TypeCompetition">
+              <PropertyRef Name="IdDirection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Specialization">
+          <End Role="Specialization" Type="Self.Specialization" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="IdSpecialization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Kozlov_StudlagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounting" EntityType="Self.Accounting" />
+          <EntitySet Name="Direction" EntityType="Self.Direction" />
+          <EntitySet Name="Group" EntityType="Self.Group" />
+          <EntitySet Name="Specialization" EntityType="Self.Specialization" />
+          <EntitySet Name="TypeCompetition" EntityType="Self.TypeCompetition" />
+          <AssociationSet Name="FK_Accounting_Group" Association="Self.FK_Accounting_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Accounting" EntitySet="Accounting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounting_TypeCompetition" Association="Self.FK_Accounting_TypeCompetition">
+            <End Role="TypeCompetition" EntitySet="TypeCompetition" />
+            <End Role="Accounting" EntitySet="Accounting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeCompetition_Direction" Association="Self.FK_TypeCompetition_Direction">
+            <End Role="Direction" EntitySet="Direction" />
+            <End Role="TypeCompetition" EntitySet="TypeCompetition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Specialization" Association="Self.FK_Group_Specialization">
+            <End Role="Specialization" EntitySet="Specialization" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Kozlov_StudlagerModelContainer" CdmEntityContainer="Kozlov_StudlagerEntities">
+          <EntitySetMapping Name="Accounting">
+            <EntityTypeMapping TypeName="Kozlov_StudlagerModel.Accounting">
+              <MappingFragment StoreEntitySet="Accounting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateGame" ColumnName="DateGame" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="IdTypeCompetition" ColumnName="IdTypeCompetition" />
+                <ScalarProperty Name="Evaluation" ColumnName="Evaluation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Direction">
+            <EntityTypeMapping TypeName="Kozlov_StudlagerModel.Direction">
+              <MappingFragment StoreEntitySet="Direction">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group">
+            <EntityTypeMapping TypeName="Kozlov_StudlagerModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdSpecialization" ColumnName="IdSpecialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specialization">
+            <EntityTypeMapping TypeName="Kozlov_StudlagerModel.Specialization">
+              <MappingFragment StoreEntitySet="Specialization">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeCompetition">
+            <EntityTypeMapping TypeName="Kozlov_StudlagerModel.TypeCompetition">
+              <MappingFragment StoreEntitySet="TypeCompetition">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdDirection" ColumnName="IdDirection" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
