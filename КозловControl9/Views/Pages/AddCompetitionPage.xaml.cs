@@ -36,6 +36,10 @@ namespace КозловControl9.Views.Pages
         {
             if (string.IsNullOrEmpty(CompetitionNameTb.Text))
             {
+                MessageBox.Show("Заполните все поля для ввода.");
+            }
+            else
+            {
                 TypeCompetition newTypeCompetition = new TypeCompetition()
                 {
                     Name = CompetitionNameTb.Text,

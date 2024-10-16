@@ -62,8 +62,8 @@ namespace КозловControl9.Views.Pages
                 };
                 _context.Accounting.Add(newAccounting);
                 _context.SaveChanges();
+                AccountingLv.ItemsSource = _context.Accounting.ToList();
                 MessageBox.Show("Запись добавлена.");
-                FrameHelper.selectedFrame.Navigate(new PicturePage());
             }
         }
 
